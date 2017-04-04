@@ -13,7 +13,7 @@ public class UserController {
   @Autowired
   private UserRegistry userRegistry;
 
-  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping
   public void registerUser(@RequestBody User user) {
     userRegistry.register(user);
   }
