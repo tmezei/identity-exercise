@@ -1,5 +1,6 @@
 package com.ways.identity;
 
+import io.restassured.http.Header;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,16 +30,24 @@ public class UserApiTest extends BaseIntegrationTest {
     }
 
     @Test
-    @Ignore
     public void getUserDetails() {
+
+        given()
+                .port(serverPort)
+                .when()
+                .contentType("application/json")
+                .body("{\"name\":\"someone\", \"email\": \"email@test.com\"}")
+                .post("/user");
+
         String responseBody = given()
                 .port(serverPort)
                 .when()
+                .header(new Header("Authorization", "someone"))
                 .get("/user")
                 .then()
                 .assertThat()
                 .statusCode(equalTo(OK.value())).extract().body().asString();
-        assertThat(responseBody, is(equalTo("")));
+        assertThat(responseBody, is(equalTo("{\"name\":\"someone\",\"email\":\"email@test.com\"}")));
 
     }
 
