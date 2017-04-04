@@ -19,9 +19,9 @@ public class UserController {
   }
 
   @GetMapping
-  public Optional<User> getUserDetails(@RequestHeader("Authorization") String token) {
+  public User getUserDetails(@RequestHeader("Authorization") String token) {
     if (token == null || token.isEmpty()) throw new IllegalStateException("You shall not pass");
 
-    return userRegistry.findByName(token);
+    return userRegistry.findByName(token).orElseThrow(IllegalArgumentException::new);
   }
 }
