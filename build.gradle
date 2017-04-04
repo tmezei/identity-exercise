@@ -1,0 +1,13 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'groovy'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.21'
+    compile 'org.springframework.boot:spring-boot-starter-web:1.5.2.RELEASE'
+    testCompile 'junit:junit:4.12'
+}
